@@ -1,0 +1,56 @@
+From: cless <hectorgh@gmail.com>
+Date: Tue, 9 Sep 2025 10:10:26 +0200
+Subject: fixing seg fault when there is no data to be transmitted and
+ starting service even when there is no desktop control, just screen casting
+
+---
+ framebuffers/pipewire/pw_framebuffer.cpp |  9 +++++++--
+ krfb/mainwindow.cpp                      | 12 +++++++++++-
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/framebuffers/pipewire/pw_framebuffer.cpp b/framebuffers/pipewire/pw_framebuffer.cpp
+index 784b075..4298f06 100644
+--- a/framebuffers/pipewire/pw_framebuffer.cpp
++++ b/framebuffers/pipewire/pw_framebuffer.cpp
+@@ -411,8 +411,13 @@ void PWFrameBuffer::Private::setVideoSize(const QSize &size)
+         return;
+     }
+     videoSize = size;
+-
+-    Q_EMIT q->frameBufferChanged();
++    
++    // LLIUREX PATCH
++    // seg fault can happen here if alowDesktopControl=false 
++    // Making sure there is frame data to be forwarded
++    if (q && q->data()) {
++        Q_EMIT q->frameBufferChanged();
++    }
+ }
+ 
+ PWFrameBuffer::Private::~Private()
+diff --git a/krfb/mainwindow.cpp b/krfb/mainwindow.cpp
+index c1b7b05..7f55b13 100644
+--- a/krfb/mainwindow.cpp
++++ b/krfb/mainwindow.cpp
+@@ -146,10 +146,20 @@ MainWindow::MainWindow(QWidget *parent)
+     KStandardAction::preferences(this, &MainWindow::showConfiguration, actionCollection());
+ 
+     setupGUI();
+-
++    
++    // LLIUREX PATCH
++    // Even if we dont allow desktop control, service should allow to 
++    // just cast the screen to users
++    
++    /*
+     if (KrfbConfig::allowDesktopControl()) {
+       m_ui.enableSharingCheckBox->setChecked(true);
+     }
++    */
++    
++    m_ui.enableSharingCheckBox->setChecked(true);
++    
++    // END OF LLIUREX PATCH
+ 
+     setAutoSaveSettings();
+ }
