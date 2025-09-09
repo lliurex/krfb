@@ -1,3 +1,9 @@
+krfb (4:25.08.0-0zneon+24.04+noble+release+build30.0-lliurex1) noble-testing; urgency=medium
+
+  * Non-maintainer upload. 
+
+ -- Hector Garcia Huerta <hectorgh@gmail.com>  Tue, 09 Sep 2025 11:29:03 +0200
+
 krfb (4:25.08.0-0zneon+24.04+noble+release+build30) noble; urgency=medium
 
   * Automatic CI Build
