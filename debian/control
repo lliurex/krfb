@@ -1,0 +1,68 @@
+Source: krfb
+Section: kde
+Priority: optional
+Uploaders: Sune Vuorela <sune@debian.org>,
+           Modestas Vainius <modax@debian.org>,
+           George Kiagiadakis <kiagiadakis.george@gmail.com>,
+           Eshat Cakar <info@eshat.de>,
+           Maximiliano Curia <maxy@debian.org>
+Build-Depends: cmake,
+               debhelper-compat (= 13),
+               kf6-extra-cmake-modules,
+               kf6-kcompletion-dev,
+               kf6-kconfig-dev,
+               kf6-kcoreaddons-dev,
+               kf6-kcrash-dev,
+               kf6-kdbusaddons-dev,
+               kf6-kdnssd-dev,
+               kf6-kdoctools-dev,
+               kf6-ki18n-dev,
+               kf6-knotifications-dev,
+               kf6-kstatusnotifieritem-dev,
+               kf6-kwallet-dev,
+               kf6-kwayland-dev,
+               kf6-kwidgetsaddons-dev,
+               kf6-kxmlgui-dev,
+               libepoxy-dev,
+               libgbm-dev,
+               libjpeg-dev,
+               libkpipewire-dev,
+               libpipewire-0.3-dev,
+               libspa-0.2-dev,
+               libvncserver-dev,
+               libwayland-dev,
+               libx11-dev,
+               libxcb-damage0-dev,
+               libxcb-image0-dev,
+               libxcb-render0-dev,
+               libxcb-shape0-dev,
+               libxcb-shm0-dev,
+               libxcb-xfixes0-dev,
+               libxcb1-dev,
+               libxdamage-dev,
+               libxtst-dev,
+               pkg-config,
+               pkg-kde-tools-neon,
+               plasma-wayland-protocols,
+               qt6-base-dev,
+               qt6-wayland-dev
+Standards-Version: 4.6.2
+Homepage: http://www.kde.org/
+Vcs-Git: https://invent.kde.org/neon/kde/krfb.git
+Vcs-Browser: https://invent.kde.org/neon/kde/krfb
+Maintainer: Neon CI <neon@kde.org>
+
+Package: krfb
+Section: net
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Suggests: khelpcenter, krdc
+Description: Desktop Sharing utility
+ KDE Desktop Sharing is a manager for easily sharing a desktop session with
+ another system.  The desktop session can be viewed or controlled remotely by
+ any VNC or RFB client, such as the KDE Remote Desktop Connection client.
+ .
+ KDE Desktop Sharing can restrict access to only users who are explicitly
+ invited, and will ask for confirmation when a user attempts to connect.
+ .
+ This package is part of the KDE networking module.
